@@ -1,6 +1,7 @@
 ---
 import '../styles/site.css';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const siteUrl = 'https://yifeidong0.github.io/stressless-grasp.github.io';
 const asset = (path: string) => `${base}/assets/${path}`;
 const figures = [
  {file:'stress.png', label:'Stress, before contact.', text:'Finite-element simulation compares the internal stress induced by candidate grasps.', tag:'01 / PHYSICS'},
@@ -16,8 +17,8 @@ const results = [{name:'StressLess',lift:.66,safe:.78,score:.72},{name:'RGB DP �
   <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>StressLess — Learning a gentler grasp</title>
   <meta name="description" content="StressLess learns fragile-object grasping from stress-aware demonstrations in simulation. A research project on generalizable gentle manipulation."/>
-  <meta property="og:title" content="StressLess — Learning a gentler grasp"/><meta property="og:description" content="Stress-aware simulation. Gentle real-world grasping."/><meta property="og:type" content="website"/><meta property="og:url" content="https://stressless-grasp.github.io/"/><meta property="og:image" content={`https://stressless-grasp.github.io${asset('video/poster.jpg')}`}/>
-  <link rel="canonical" href="https://stressless-grasp.github.io/"/>
+  <meta property="og:title" content="StressLess — Learning a gentler grasp"/><meta property="og:description" content="Stress-aware simulation. Gentle real-world grasping."/><meta property="og:type" content="website"/><meta property="og:url" content={`${siteUrl}/`}/><meta property="og:image" content={`${siteUrl}/assets/video/poster.jpg`}/>
+  <link rel="canonical" href={`${siteUrl}/`}/>
   <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`}/>
  </head>
  <body>

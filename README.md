@@ -25,9 +25,9 @@ Open <http://localhost:4321/>. `npm run build` generates the static site in `dis
 
 ## GitHub Pages
 
-The repository must be named `stressless-grasp.github.io` under the GitHub account or organization with the same name. The included workflow deploys every push to `main` through GitHub Actions. In the repository settings, select **GitHub Actions** as the Pages source.
+The site is deployed at <https://yifeidong0.github.io/stressless-grasp.github.io/>. The included workflow deploys every push to `main` through GitHub Actions.
 
-The account or organization profile, repository metadata, commit identities, and public membership must also remain anonymous throughout double-blind review.
+Because this deployment is hosted by a personal GitHub account, the repository owner is publicly visible and the deployment is not anonymous.
 
 ## Research assets
 
