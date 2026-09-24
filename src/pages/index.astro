@@ -3,17 +3,46 @@ import '../styles/site.css';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const siteUrl = 'https://stressless-grasp.github.io';
 const asset = (path: string) => `${base}/assets/${path}`;
-const chapters = [
-  { id: 'highlights', label: 'Highlights', title: 'Gentle grasps, across objects', text: 'A quick look at StressLess handling fragile and deformable objects with one policy.', src: 'highlights.mp4' },
-  { id: 'motivation', label: 'Motivation', title: 'Coverage is the bottleneck', text: 'Real demonstrations are expensive to collect for every category, shape, pose, and material.', src: 'motivation.mp4' },
-  { id: 'method', label: 'Method', title: 'Plan with stress, learn from breadth', text: 'A FEM contact model finds stable, low-stress grasps. A scripted executor turns them into diverse simulated demonstrations.', src: 'method.mp4' },
-  { id: 'evaluation', label: 'Evaluation', title: 'From simulation to the real robot', text: 'One point-cloud diffusion policy transfers zero-shot using a single external depth camera, without tactile or force sensing.', src: 'evaluation.mp4' },
-  { id: 'results', label: 'Key results', title: 'Lift more. Handle more gently.', text: 'Across 11 categories, StressLess leads the baselines in lift, safety, and their combined S-Lift score.', src: 'results.mp4' },
+const title = 'StressLess: Cross-Category Deformable and Fragile Object Grasping from Stress-Aware Demonstrations at Scale';
+const jumps = [
+  { label: 'Highlights', time: 0, stamp: '00:00' },
+  { label: 'Motivation', time: 12.17, stamp: '00:12.170' },
+  { label: 'Method', time: 46.81, stamp: '00:46.810' },
+  { label: 'Experiments', time: 108.5, stamp: '01:48.500' },
+];
+const comparisons = [
+  {
+    number: '01',
+    id: 'retry',
+    name: 'Reactive grasping and retries',
+    description: 'When an initial grasp fails, StressLess can reopen, reapproach, and grasp again. The shown RGB-frozen baseline stops after its first failed attempt.',
+    baseline: 'RGB-frozen · no retry',
+    ours: 'StressLess · regrasp and recover',
+    note: 'In 31 first-attempt failures, StressLess retried 25 times and recovered 10 lifts.',
+  },
+  {
+    number: '02',
+    id: 'gentleness',
+    name: 'Gentle object handling',
+    description: 'In this mushroom example, the RGB-scratch baseline damages the object during grasping; StressLess lifts it while keeping it intact.',
+    baseline: 'RGB-scratch · mushroom damaged',
+    ours: 'StressLess · mushroom intact',
+    note: 'The paper measures gentleness with a lift-conditioned safety score assigned by two blinded evaluators.',
+  },
+  {
+    number: '03',
+    id: 'ood',
+    name: 'Generalization to unseen geometry',
+    description: 'The simulated set contains standing cylinders but no lying can. StressLess handles the real can in this example, with a retry; the RGB-scratch baseline damages it.',
+    baseline: 'RGB-scratch · can damaged',
+    ours: 'StressLess · can kept intact',
+    note: 'Across can trials, StressLess achieved Lift 1.00 and Safe 0.88; the paper also evaluates a thin-shell paper cup.',
+  },
 ];
 const methods = [
   { name: 'StressLess (ours)', lift: .67, safe: .78, score: .73 },
-  { name: 'RGB-finetune', lift: .48, safe: .67, score: .58 },
   { name: 'RGB-scratch', lift: .57, safe: .67, score: .62 },
+  { name: 'RGB-finetune', lift: .48, safe: .67, score: .58 },
   { name: 'Point-cloud DP', lift: .43, safe: .67, score: .55 },
   { name: 'RGB-frozen', lift: .18, safe: .53, score: .36 },
 ];
@@ -23,58 +52,107 @@ const methods = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>StressLess: Cross-Category Deformable and Fragile Object Grasping from Stress-Aware Demonstrations at Scale</title>
-    <meta name="description" content="StressLess generates stress-aware grasp demonstrations in simulation and transfers one gentle grasping policy to diverse real-world objects." />
-    <meta property="og:title" content="StressLess: Cross-Category Deformable and Fragile Object Grasping from Stress-Aware Demonstrations at Scale" />
-    <meta property="og:description" content="One policy for gentle grasping, trained on stress-aware demonstrations generated at scale." />
-    <meta property="og:type" content="website" /><meta property="og:url" content={`${siteUrl}/`} />
-    <link rel="canonical" href={`${siteUrl}/`} /><link rel="icon" href={`${base}/favicon.svg`} />
+    <title>{title}</title>
+    <meta name="description" content="StressLess synthesizes low-stress grasps in simulation and trains one point-cloud policy for zero-shot gentle grasping across object categories." />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="Stress-aware grasp planning, simulation-generated demonstrations, and one policy for gentle real-world grasping." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={`${siteUrl}/`} />
+    <link rel="canonical" href={`${siteUrl}/`} />
+    <link rel="icon" href={`${base}/favicon.svg`} />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
-    <header class="wrap site-header"><a class="brand" href="#top">StressLess<span>RESEARCH PROJECT</span></a><nav aria-label="Main navigation"><a href="#method">Method</a><a href="#results">Results</a><a href="#videos">Videos</a><a class="nav-paper" href={asset('paper/stressless.pdf')}>Paper ↗</a></nav></header>
+    <header class="wrap site-header">
+      <a class="brand" href="#top">StressLess<span>RESEARCH PROJECT</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#video">Video</a><a href="#method">Method</a><a href="#evaluation">Evaluation</a><a href="#results">Results</a>
+        <a class="nav-paper" href={asset('paper/stressless.pdf')}>Paper ↗</a>
+      </nav>
+    </header>
     <main id="main">
       <section class="wrap hero" id="top">
-        <div class="hero-copy"><p class="eyebrow"><span class="dot"></span> SIM-TO-REAL · GENTLE MANIPULATION</p>
-          <h1>StressLess: Cross-Category Deformable and Fragile Object Grasping from Stress-Aware Demonstrations at Scale</h1>
-          <p class="lede">A single robot policy learns to lift fragile and deformable objects gently, from stress-aware demonstrations generated in simulation.</p>
-          <div class="hero-actions"><a class="button primary" href={asset('paper/stressless.pdf')}>Read the paper <span>↗</span></a><a class="button secondary" href="#method">Explore the project <span>↓</span></a></div>
+        <p class="eyebrow"><span class="dot"></span> SIM-TO-REAL · GENTLE MANIPULATION</p>
+        <h1>{title}</h1>
+        <p class="lede">Learning to grasp fragile and deformable objects from stress-aware demonstrations generated at scale in simulation.</p>
+        <div class="hero-actions">
+          <a class="button primary" href={asset('paper/stressless.pdf')}>Read the paper <span>↗</span></a>
+          <a class="button secondary" href="#video">Watch the video <span>↓</span></a>
         </div>
-        <div class="hero-video card"><video src={asset('video/gallery-presentation.mp4')} autoplay muted loop playsinline aria-label="StressLess project presentation video"></video><div class="video-caption"><span class="live-dot"></span> StressLess · project overview</div></div>
+        <div class="overview">
+          <h2>StressLess · project overview</h2>
+          <div class="hero-video card"><video src={asset('video/gallery-presentation.mp4')} autoplay muted loop playsinline aria-label="StressLess project overview video"></video></div>
+        </div>
       </section>
 
-      <section class="wrap tldr card" aria-labelledby="tldr-title"><div class="tldr-mark">TL;DR</div><div><h2 id="tldr-title">Gentleness can be planned.</h2><p>We use a finite-element model to find grasps that are both stable and low-stress, then generate over 6,000 demonstrations across 34 object categories. A single point-cloud policy transfers zero-shot to real objects, where it outperforms real-demo-trained baselines on average lift and safety.</p></div></section>
-
-      <section class="wrap stats" aria-label="Project at a glance"><div class="stat card"><strong>6k<span>+</span></strong><span>simulated demonstrations</span></div><div class="stat card"><strong>34</strong><span>training object categories</span></div><div class="stat card"><strong>11</strong><span>real-world test categories</span></div><div class="stat card"><strong>275</strong><span>real-world evaluations</span></div></section>
-
-      <section class="wrap section" id="method"><div class="section-heading"><div><p class="eyebrow">01 / APPROACH</p><h2>Stress-aware supervision,<br /><em>at scale.</em></h2></div><p class="section-intro">The policy does not need to feel contact force. We use simulated internal stress to choose gentle grasps before training, then give the robot a simple point-cloud view at deployment.</p></div>
-        <div class="method-card card"><div class="method-image"><img src={asset('figures/method-v4.png')} alt="StressLess pipeline: FEM grasp synthesis, simulated demonstrations, point-cloud policy, and real-world deployment" loading="lazy" /></div><div class="method-steps"><article><span>01</span><div><h3>Score candidate grasps</h3><p>A finite-element contact model estimates internal stress as the gripper closes.</p></div></article><article><span>02</span><div><h3>Generate varied experience</h3><p>A scripted planner selects stable, low-stress grasps across randomized poses, sizes, shapes, and materials.</p></div></article><article><span>03</span><div><h3>Transfer one policy</h3><p>Train a point-cloud diffusion policy and deploy it zero-shot on a 7-DoF arm.</p></div></article></div></div>
+      <section class="wrap tldr card" aria-labelledby="tldr-title">
+        <div class="tldr-mark" id="tldr-title">TL;DR</div>
+        <p>StressLess uses finite-element stress to synthesize stable, gentle grasps at scale, then trains one point-cloud policy that transfers zero-shot across fragile and deformable objects and improves both lift and safety in real-world trials.</p>
       </section>
 
-      <section class="soft-band"><div class="wrap section" id="results"><div class="section-heading"><div><p class="eyebrow">02 / REAL-WORLD EVALUATION</p><h2>More lift.<br /><em>Less damage.</em></h2></div><p class="section-intro">Across 11 categories and 275 evaluations, StressLess improves the category-averaged lift, safety, and combined S-Lift scores over policies trained with real demonstrations.</p></div>
-        <div class="result-layout"><div class="score-cards"><div class="score-card card"><span>LIFT</span><strong>0.67</strong><small>↑ from 0.57 best baseline</small></div><div class="score-card card"><span>SAFE</span><strong>0.78</strong><small>↑ from 0.67 best baseline</small></div><div class="score-card featured card"><span>S-LIFT</span><strong>0.73</strong><small>↑ from 0.62 best baseline</small></div><div class="retry-card card"><strong>10 <span>/ 25</span></strong><p>failed first attempts recovered on retry; recovery adds 0.18 to Lift.</p></div></div>
-          <div class="results-figure card"><img src={asset('figures/evaluation-latest.png')} alt="Eleven real-world evaluation object categories" loading="lazy" /><p>Evaluation set: 11 categories, including objects absent from the simulated training set.</p></div></div>
-        <div class="table-card card"><div class="table-heading"><div><p class="eyebrow">AVERAGE ACROSS 11 CATEGORIES</p><h3>Policy comparison</h3></div><span>Higher is better ↑</span></div><div class="table-scroll"><table><thead><tr><th>Policy</th><th>Lift</th><th>Safe</th><th>S-Lift</th></tr></thead><tbody>{methods.map((m, i) => <tr class:list={{ ours: i === 0 }}><th>{m.name}</th><td>{m.lift.toFixed(2)}</td><td>{m.safe.toFixed(2)}</td><td>{m.score.toFixed(2)}</td></tr>)}</tbody></table></div><p class="table-note">Scores are category-averaged and normalized to [0, 1]. Safety is lift-conditioned; S-Lift equally combines lift and safety.</p></div>
+      <section class="wrap section" id="video">
+        <div class="section-heading"><div><p class="eyebrow">01 / PROJECT VIDEO</p><h2>The complete story,<br /><em>at your pace.</em></h2></div><p class="section-intro">Play the full presentation from the beginning, or jump directly to a section. The video continues from the selected point.</p></div>
+        <div class="presentation card">
+          <video id="presentation-video" src={asset('video/presentation-full.mp4')} controls playsinline preload="metadata" aria-label="Full StressLess project presentation"></video>
+          <div class="presentation-bottom"><div><h3>Full project presentation</h3><p>Highlights · motivation · method · experiments</p></div><span>03:00</span></div>
+          <div class="jump-list" aria-label="Jump to a section of the video">{jumps.map((jump) => <button class="jump-button" type="button" data-time={jump.time}><span>{jump.label}</span><small>{jump.stamp}</small></button>)}</div>
+        </div>
+      </section>
+
+      <section class="soft-band" id="method"><div class="wrap section">
+        <div class="section-heading"><div><p class="eyebrow">02 / METHOD</p><h2>From stress-aware grasps<br /><em>to one policy.</em></h2></div><p class="section-intro">The three blocks below follow the pipeline in Fig. 2 of the paper.</p></div>
+        <div class="method-card card">
+          <div class="method-image"><img src={asset('figures/method-v4.png')} alt="Method figure: simulated stress-aware demonstration generation, point-cloud diffusion policy, and real-world deployment" loading="lazy" /></div>
+          <div class="method-steps">
+            <article><span class="step-number">01</span><div><h3>Stress-aware demonstration generation</h3><p>A finite-element contact model scores grasp pose and closing width for internal stress and grip stability. Selected grasps run in soft-body simulation across randomized object poses, sizes, shapes, and materials.</p></div></article>
+            <article><span class="step-number">02</span><div><h3>Point-cloud policy learning</h3><p>One Diffusion Policy learns action chunks from all simulated demonstrations. A PointNet encoder processes the depth point cloud; robot pose and gripper width provide proprioception.</p></div></article>
+            <article><span class="step-number">03</span><div><h3>Zero-shot real-world deployment</h3><p>The policy controls a 7-DoF arm and parallel-jaw gripper from one fixed depth camera. It predicts end-effector pose and gripper width without tactile or force feedback.</p></div></article>
+          </div>
+        </div>
       </div></section>
 
-      <section class="wrap section" id="videos"><div class="section-heading"><div><p class="eyebrow">03 / VIDEO CHAPTERS</p><h2>See the story<br /><em>in motion.</em></h2></div><p class="section-intro">Short chapters cut from the project presentation, from the motivation and stress-aware planning to real-world results.</p></div>
-        <div class="video-chapters"><div class="chapter-list" role="tablist" aria-label="Presentation video chapters">{chapters.map((c, i) => <button class:list={{ chapter: true, selected: i === 0 }} role="tab" aria-selected={i === 0 ? 'true' : 'false'} aria-controls="chapter-player" data-title={c.title} data-text={c.text} data-src={asset(`video/clips/${c.src}`)}><span class="chapter-num">0{i + 1}</span><span class="chapter-label">{c.label}</span><span class="chapter-arrow">↗</span></button>)}</div><div class="chapter-player card" id="chapter-player" role="tabpanel"><video id="chapter-video" controls playsinline preload="metadata" src={asset(`video/clips/${chapters[0].src}`)}></video><div class="chapter-caption"><p class="eyebrow" id="chapter-kicker">01 / HIGHLIGHTS</p><h3 id="chapter-title">{chapters[0].title}</h3><p id="chapter-text">{chapters[0].text}</p></div></div></div>
+      <section class="wrap section" id="evaluation">
+        <div class="section-heading"><div><p class="eyebrow">03 / QUALITATIVE EVALUATION</p><h2>Three behaviors,<br /><em>six video views.</em></h2></div><p class="section-intro">Paired clips from the real-world comparisons in the project presentation. Each view shows the same example as its partner.</p></div>
+        <div class="comparisons">{comparisons.map((c) => <article class="comparison card">
+          <div class="comparison-heading"><span class="feature-number">{c.number}</span><div><h3>{c.name}</h3><p>{c.description}</p></div></div>
+          <div class="comparison-videos">
+            <figure><div class="eval-video"><video src={asset(`video/evaluation/${c.id}-baseline.mp4`)} poster={asset(`video/evaluation/posters/${c.id}-baseline.jpg`)} controls playsinline preload="metadata" aria-label={c.baseline}></video></div><figcaption><span class="baseline-dot"></span>{c.baseline}</figcaption></figure>
+            <figure><div class="eval-video"><video src={asset(`video/evaluation/${c.id}-stressless.mp4`)} poster={asset(`video/evaluation/posters/${c.id}-stressless.jpg`)} controls playsinline preload="metadata" aria-label={c.ours}></video></div><figcaption><span class="ours-dot"></span>{c.ours}</figcaption></figure>
+          </div>
+          <p class="comparison-note">{c.note}</p>
+        </article>)}</div>
       </section>
 
-      <section class="wrap paper-cta card"><div><p class="eyebrow">FULL PAPER</p><h2>Read how StressLess works.</h2><p>StressLess: Cross-Category Deformable and Fragile Object Grasping from Stress-Aware Demonstrations at Scale</p></div><a class="button primary" href={asset('paper/stressless.pdf')}>Open PDF <span>↗</span></a></section>
+      <section class="soft-band" id="results"><div class="wrap section">
+        <div class="section-heading"><div><p class="eyebrow">04 / QUANTITATIVE RESULTS</p><h2>Lift reliably.<br /><em>Handle gently.</em></h2></div><p class="section-intro">The numbers below come from Tables II–IV of the paper. Real-world results average 55 trials per method across 11 categories, assessed by two blinded evaluators.</p></div>
+        <div class="stats"><div class="stat card"><strong>6k<span>+</span></strong><span>simulated demonstrations</span></div><div class="stat card"><strong>34</strong><span>simulation object categories</span></div><div class="stat card"><strong>11</strong><span>real-world evaluation categories</span></div><div class="stat card"><strong>275</strong><span>total real-world trials</span></div></div>
+        <div class="score-cards">
+          <div class="score-card card"><span>LIFT ↑</span><strong>0.67</strong><p>Best baseline: 0.57</p></div>
+          <div class="score-card card"><span>SAFE ↑</span><strong>0.78</strong><p>Best baseline: 0.67</p></div>
+          <div class="score-card featured card"><span>S-LIFT ↑</span><strong>0.73</strong><p>Best baseline: 0.62</p></div>
+        </div>
+        <div class="results-grid">
+          <div class="table-card card"><div class="table-heading"><div><p class="eyebrow">TABLE III · REAL WORLD</p><h3>Category-averaged scores</h3></div><span>Higher is better ↑</span></div><div class="table-scroll"><table><thead><tr><th>Policy</th><th>Lift</th><th>Safe</th><th>S-Lift</th></tr></thead><tbody>{methods.map((m, i) => <tr class:list={{ ours: i === 0 }}><th>{m.name}</th><td>{m.lift.toFixed(2)}</td><td>{m.safe.toFixed(2)}</td><td>{m.score.toFixed(2)}</td></tr>)}</tbody></table></div><p class="table-note">Lift is normalized lift height. Safe is a lift-conditioned damage score. S-Lift averages Lift and Safe; all scores lie in [0, 1].</p></div>
+          <div class="evidence-stack">
+            <div class="evidence card"><p class="eyebrow">TABLE II · SIMULATION</p><strong>89.7% <span>vs 39.2%</span></strong><p>Successful grasps remaining below the material yield stress: StressLess versus the same grasp search without FEM.</p></div>
+            <div class="evidence card"><p class="eyebrow">TABLE IV · RETRIES</p><strong>10 <span>recovered lifts</span></strong><p>Of 31 failed first attempts, the policy retried 25 and recovered 10; retries contributed 0.18 to its 0.67 Lift score.</p></div>
+          </div>
+        </div>
+        <div class="results-figure card"><img src={asset('figures/evaluation-latest.png')} alt="Eleven fragile and deformable object categories in the real-world evaluation" loading="lazy" /><p>Real-world evaluation objects across 11 categories, including the can and paper cup.</p></div>
+      </div></section>
+
+      <section class="wrap paper-cta card"><div><p class="eyebrow">FULL PAPER</p><h2>Read the complete method and evaluation.</h2><p>{title}</p></div><a class="button primary" href={asset('paper/stressless.pdf')}>Open PDF <span>↗</span></a></section>
     </main>
-    <footer class="wrap"><a class="brand" href="#top">StressLess<span>SIM-TO-REAL GENTLE MANIPULATION</span></a><span>Project website · Authors and affiliations omitted</span></footer>
+    <footer class="wrap"><a class="brand" href="#top">StressLess<span>SIM-TO-REAL GENTLE MANIPULATION</span></a><span>Project website</span></footer>
     <script is:inline>
-      const chapterButtons = [...document.querySelectorAll('.chapter')];
-      const chapterVideo = document.querySelector('#chapter-video');
-      chapterButtons.forEach((button, index) => button.addEventListener('click', () => {
-        chapterButtons.forEach((item) => { item.classList.remove('selected'); item.setAttribute('aria-selected', 'false'); });
-        button.classList.add('selected'); button.setAttribute('aria-selected', 'true');
-        chapterVideo.src = button.dataset.src; chapterVideo.load();
-        document.querySelector('#chapter-title').textContent = button.dataset.title;
-        document.querySelector('#chapter-text').textContent = button.dataset.text;
-        document.querySelector('#chapter-kicker').textContent = `0${index + 1} / ${button.querySelector('.chapter-label').textContent.toUpperCase()}`;
-      }));
+      const presentation = document.querySelector('#presentation-video');
+      document.querySelectorAll('.jump-button').forEach((button) => {
+        button.addEventListener('click', () => {
+          const seek = () => { presentation.currentTime = Number(button.dataset.time); presentation.play(); };
+          if (presentation.readyState >= 1) seek();
+          else presentation.addEventListener('loadedmetadata', seek, { once: true });
+        });
+      });
     </script>
   </body>
 </html>
