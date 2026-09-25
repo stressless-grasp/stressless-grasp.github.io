@@ -91,7 +91,7 @@ const methods = [
       </section>
 
       <section class="wrap section" id="video">
-        <div class="section-heading"><div><p class="eyebrow">01 / PROJECT VIDEO</p><h2>The complete story,<br /><em>at your pace.</em></h2></div><p class="section-intro">Play the full presentation from the beginning, or jump directly to a section. The video continues from the selected point.</p></div>
+        <div class="section-heading"><div><p class="eyebrow">01 / PROJECT VIDEO</p><h2>Overview of StressLess</h2></div></div>
         <div class="presentation card">
           <video id="presentation-video" src={asset('video/presentation-full.mp4')} controls playsinline preload="metadata" aria-label="Full StressLess project presentation"></video>
           <div class="presentation-bottom"><div><h3>Full project presentation</h3><p>Highlights · motivation · method · experiments</p></div><span>03:00</span></div>
@@ -100,7 +100,7 @@ const methods = [
       </section>
 
       <section class="soft-band" id="method"><div class="wrap section">
-        <div class="section-heading"><div><p class="eyebrow">02 / METHOD</p><h2>From stress-aware grasps<br /><em>to one policy.</em></h2></div><p class="section-intro">The three blocks below follow the pipeline in Fig. 2 of the paper.</p></div>
+        <div class="section-heading"><div><p class="eyebrow">02 / METHOD</p><h2>From stress-aware grasps<br /><em>to one policy.</em></h2></div></div>
         <div class="method-card card">
           <div class="method-image"><img src={asset('figures/method-v4.png')} alt="Method figure: simulated stress-aware demonstration generation, point-cloud diffusion policy, and real-world deployment" loading="lazy" /></div>
           <div class="method-steps">
@@ -112,7 +112,7 @@ const methods = [
       </div></section>
 
       <section class="wrap section" id="evaluation">
-        <div class="section-heading"><div><p class="eyebrow">03 / QUALITATIVE EVALUATION</p><h2>Three behaviors,<br /><em>six video views.</em></h2></div><p class="section-intro">Paired clips from the real-world comparisons in the project presentation. Each view shows the same example as its partner.</p></div>
+        <div class="section-heading"><div><p class="eyebrow">03 / QUALITATIVE EVALUATION</p><h2>Gentle, reactive, and generalizable grasping policy</h2></div></div>
         <div class="comparisons">{comparisons.map((c) => <article class="comparison card">
           <div class="comparison-heading"><span class="feature-number">{c.number}</span><div><h3>{c.name}</h3><p>{c.description}</p></div></div>
           <div class="comparison-videos">
