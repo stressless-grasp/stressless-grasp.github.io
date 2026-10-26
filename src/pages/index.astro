@@ -39,13 +39,6 @@ const comparisons = [
     note: 'Across can trials, StressLess achieved Lift 1.00 and Safe 0.88; the paper also evaluates a thin-shell paper cup.',
   },
 ];
-const methods = [
-  { name: 'StressLess (ours)', lift: .67, safe: .78, score: .73 },
-  { name: 'RGB-scratch', lift: .57, safe: .67, score: .62 },
-  { name: 'RGB-finetune', lift: .48, safe: .67, score: .58 },
-  { name: 'Point-cloud DP', lift: .43, safe: .67, score: .55 },
-  { name: 'RGB-frozen', lift: .18, safe: .53, score: .36 },
-];
 ---
 <!doctype html>
 <html lang="en">
@@ -66,7 +59,7 @@ const methods = [
     <header class="wrap site-header">
       <a class="brand" href="#top">StressLess<span>RESEARCH PROJECT</span></a>
       <nav aria-label="Main navigation">
-        <a href="#video">Video</a><a href="#method">Method</a><a href="#evaluation">Evaluation</a><a href="#results">Results</a>
+        <a href="#video">Video</a><a href="#method">Method</a><a href="#evaluation">Evaluation</a>
         <a class="nav-paper" href={asset('paper/stressless.pdf')}>Paper ↗</a>
       </nav>
     </header>
@@ -121,25 +114,8 @@ const methods = [
           </div>
           <p class="comparison-note">{c.note}</p>
         </article>)}</div>
-      </section>
-
-      <section class="soft-band" id="results"><div class="wrap section">
-        <div class="section-heading"><div><p class="eyebrow">04 / QUANTITATIVE RESULTS</p><h2>Lift reliably.<br /><em>Handle gently.</em></h2></div></div>
-        <div class="stats"><div class="stat card"><strong>6k<span>+</span></strong><span>simulated demonstrations</span></div><div class="stat card"><strong>34</strong><span>simulation object categories</span></div><div class="stat card"><strong>11</strong><span>real-world evaluation categories</span></div><div class="stat card"><strong>275</strong><span>total real-world trials</span></div></div>
-        <div class="score-cards">
-          <div class="score-card card"><span>LIFT ↑</span><strong>0.67</strong><p>Best baseline: 0.57</p></div>
-          <div class="score-card card"><span>SAFE ↑</span><strong>0.78</strong><p>Best baseline: 0.67</p></div>
-          <div class="score-card featured card"><span>S-LIFT ↑</span><strong>0.73</strong><p>Best baseline: 0.62</p></div>
-        </div>
-        <div class="results-grid">
-          <div class="table-card card"><div class="table-heading"><div><p class="eyebrow">TABLE III · REAL WORLD</p><h3>Category-averaged scores</h3></div><span>Higher is better ↑</span></div><div class="table-scroll"><table><thead><tr><th>Policy</th><th>Lift</th><th>Safe</th><th>S-Lift</th></tr></thead><tbody>{methods.map((m, i) => <tr class:list={{ ours: i === 0 }}><th>{m.name}</th><td>{m.lift.toFixed(2)}</td><td>{m.safe.toFixed(2)}</td><td>{m.score.toFixed(2)}</td></tr>)}</tbody></table></div><p class="table-note">Lift is normalized lift height. Safe is a lift-conditioned damage score. S-Lift averages Lift and Safe; all scores lie in [0, 1].</p></div>
-          <div class="evidence-stack">
-            <div class="evidence card"><p class="eyebrow">TABLE II · SIMULATION</p><strong>89.7% <span>vs 39.2%</span></strong><p>Successful grasps remaining below the material yield stress: StressLess versus the same grasp search without FEM.</p></div>
-            <div class="evidence card"><p class="eyebrow">TABLE IV · RETRIES</p><strong>10 <span>recovered lifts</span></strong><p>Of 31 failed first attempts, the policy retried 25 and recovered 10; retries contributed 0.18 to its 0.67 Lift score.</p></div>
-          </div>
-        </div>
         <div class="results-figure card"><img src={asset('figures/evaluation-latest.png')} alt="Eleven fragile and deformable object categories in the real-world evaluation" loading="lazy" /><p>Real-world evaluation objects across 11 categories, including the can and paper cup.</p></div>
-      </div></section>
+      </section>
 
       <section class="wrap paper-cta card"><div><p class="eyebrow">FULL PAPER</p><h2>Read the complete method and evaluation.</h2><p>{title}</p></div><a class="button primary" href={asset('paper/stressless.pdf')}>Open PDF <span>↗</span></a></section>
     </main>
