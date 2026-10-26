@@ -128,3 +128,102 @@ footer{padding:25px 0 32px;border-top:1px solid var(--line);display:flex;align-i
   footer{align-items:start;gap:15px;flex-direction:column}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+
+/* Editorial research-page treatment inspired by AlphaNIST. */
+:root{
+  --ink:#292926;--muted:#64645e;--line:#dfdfd8;--paper:#fcfcfa;
+  --card:#fcfcfa;--wash:#f1f1ed;--green:#34342f;--green-dark:#292926;
+  --mint:#eeeee9;--radius:18px;--shadow:none;
+}
+body{font:16px/1.75 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{width:min(1120px,calc(100% - 80px))}
+.card{border:0;box-shadow:none;background:transparent;border-radius:0}
+.site-header{position:sticky;top:0;z-index:10;height:auto;width:100%;border-bottom:1px solid var(--line);background:rgba(252,252,250,.94);backdrop-filter:blur(15px)}
+.header-inner{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{font:500 18px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;letter-spacing:-.4px;color:var(--ink)}
+.site-header nav{gap:25px;font-size:13px;font-weight:500;color:var(--muted)}
+.nav-paper{padding:0;border-radius:0;background:transparent;color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:1.5px;color:var(--muted)}
+.hero{padding:90px 0 0;text-align:center}
+.hero>.eyebrow{justify-content:center}
+.dot{width:6px;height:6px;background:var(--ink)}
+.hero h1{max-width:900px;margin:23px auto 26px;font:400 clamp(36px,4.4vw,56px)/1.16 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;letter-spacing:-1.9px}
+.hero-subtitle{max-width:720px;margin:0 auto 16px;font-size:20px;line-height:1.45;letter-spacing:-.3px}
+.lede{max-width:680px;margin-inline:auto;font-size:17px;line-height:1.7}
+.hero-actions{justify-content:center;margin-top:24px;gap:10px}
+.button{min-height:42px;padding:8px 17px;border:1px solid var(--line);border-radius:999px;background:var(--mint);color:var(--ink);font-size:13px;font-weight:500;gap:10px}
+.button:hover,.primary:hover{background:#e5e5de;color:var(--ink)}
+.primary{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.overview{margin-top:67px;text-align:left}
+.overview h2{font:400 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;letter-spacing:0;margin-bottom:12px}
+.hero-video{padding:0;overflow:hidden;border-radius:20px;background:#242522}
+.hero-video video{height:auto;max-height:620px;aspect-ratio:16/9;background:#242522;border-radius:20px}
+.tldr{display:block;max-width:760px;padding:54px 0 0;text-align:left}
+.tldr-mark{display:block;width:max-content;padding:0;margin-bottom:11px;background:none;border-radius:0;color:var(--ink);font-size:13px;font-weight:500;letter-spacing:0}
+.tldr p{font:400 16px/1.8 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;letter-spacing:0;color:var(--muted)}
+.section{padding:75px 0}
+.section-heading{margin-bottom:25px}
+.section-heading h2{max-width:780px;margin-top:12px;font:400 clamp(27px,3vw,38px)/1.24 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;letter-spacing:-.9px}
+.section-heading h2 em{color:inherit;font-style:normal}
+.presentation{padding:0;overflow:visible}
+.presentation video{border-radius:20px;background:#242522}
+.presentation-bottom{padding:13px 0 0}
+.presentation-bottom h3{font:500 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif}
+.presentation-bottom p,.presentation-bottom>span{font-size:12px}
+.jump-list{display:flex;flex-wrap:wrap;gap:5px;padding:18px 0 0}
+.jump-button{min-height:40px;padding:7px 15px;border:0;border-radius:999px;background:var(--mint);color:var(--ink);font-size:12px;font-weight:500;gap:12px}
+.jump-button:hover,.jump-button:focus-visible{background:#e1e1da;border:0}
+.jump-button small{font-size:11px;color:var(--muted)}
+.soft-band{border:0;background:var(--wash)}
+.method-card{overflow:visible}
+.method-image{padding:24px;background:#fff;border:0;border-radius:18px}
+.method-image img{max-height:none}
+.method-steps{grid-template-columns:repeat(3,1fr);gap:36px;padding:28px 0 0}
+.method-steps article{display:block;padding:0;border:0}
+.step-number{width:auto;height:auto;display:block;margin-bottom:13px;background:none;border-radius:0;color:var(--muted);font-size:12px;font-weight:500}
+.method-steps h3{font:500 16px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;margin:0 0 8px}
+.method-steps p{font-size:15px;line-height:1.75}
+.comparisons{gap:0}
+.comparison{padding:32px 0;border-bottom:1px solid var(--line);overflow:visible}
+.comparison:first-child{padding-top:0}
+.comparison-heading{gap:0;margin-bottom:19px}
+.feature-number{width:auto;height:auto;display:block;margin-right:18px;padding-top:4px;background:none;border-radius:0;color:var(--muted);font-size:12px;font-weight:500}
+.comparison-heading h3{font:500 20px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;letter-spacing:-.3px}
+.comparison-heading p{max-width:760px;font-size:15px;line-height:1.75}
+.comparison-videos{gap:18px}
+.eval-video{padding:0;border:0;border-radius:16px;background:#242522;overflow:hidden}
+.eval-video video{border-radius:16px;background:#242522}
+.comparison-videos figcaption{padding:9px 0 0;font-size:12px;font-weight:500;color:var(--muted)}
+.baseline-dot,.ours-dot{width:6px;height:6px;background:#8e8e84}
+.ours-dot{background:var(--ink)}
+.comparison-note{max-width:760px;margin-top:16px;padding:0;border:0;font-size:13px;line-height:1.7}
+.results-figure{margin-top:32px;padding:20px;border-radius:18px;background:var(--wash)}
+.results-figure img{height:auto;max-height:350px}
+.results-figure p{margin-top:12px;font-size:12px}
+.paper-cta{margin:20px auto 65px;padding:28px 0;border-top:1px solid var(--line);background:transparent}
+.paper-cta h2{font:400 27px/1.3 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;margin:8px 0}
+.paper-cta>div>p:last-child{font-size:13px}
+footer{padding:23px 0 30px;font-size:12px}
+footer .brand span{font-size:9px}
+a:focus-visible,button:focus-visible,video:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+@media(max-width:900px){.method-steps{gap:22px}.method-steps article{border:0;padding:0}}
+@media(max-width:640px){
+  .wrap{width:calc(100% - 40px)}
+  .header-inner{min-height:64px}.site-header nav{gap:14px;font-size:12px}
+  .site-header nav a:nth-child(2),.site-header nav a:nth-child(3){display:none}
+  .hero{padding-top:66px}.hero h1{font-size:42px;letter-spacing:-1.1px}.hero-subtitle{font-size:18px}.lede{font-size:15px}
+  .overview{margin-top:46px}.overview h2{font-size:13px}.hero-video video{height:auto}
+  .tldr{padding-top:42px}.tldr p{font-size:15px}
+  .section{padding:60px 0}.section-heading h2{font-size:28px}
+  .presentation{padding:0}.presentation video{border-radius:14px}
+  .presentation-bottom{padding:10px 0 0}.jump-list{gap:5px;padding:15px 0 0}
+  .jump-button{padding:7px 11px;font-size:11px}
+  .method-image{padding:12px;border-radius:14px}.method-steps{grid-template-columns:1fr;gap:24px;padding-top:24px}
+  .method-steps h3{font-size:16px}.method-steps p{font-size:14px}
+  .comparison{padding:26px 0;border-radius:0}.comparison-heading{gap:0}
+  .feature-number{height:auto;width:auto;font-size:11px}.comparison-heading h3{font-size:18px}.comparison-heading p{font-size:14px}
+  .comparison-videos{gap:18px}.comparison-videos figcaption{font-size:12px}.comparison-note{font-size:12px}
+  .results-figure img{height:auto;max-height:250px}.results-figure p{font-size:12px}
+  .paper-cta{margin:10px auto 45px;padding:26px 0}.paper-cta h2{font-size:24px}
+  footer{gap:12px}
+}
