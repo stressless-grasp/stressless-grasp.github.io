@@ -133,8 +133,9 @@ footer{padding:25px 0 32px;border-top:1px solid var(--line);display:flex;align-i
 :root{
   --ink:#292926;--muted:#64645e;--line:#dfdfd8;--paper:#fcfcfa;
   --card:#fcfcfa;--wash:#f1f1ed;--green:#34342f;--green-dark:#292926;
-  --mint:#eeeee9;--radius:18px;--shadow:none;
+  --mint:#eeeee9;--radius:18px;--shadow:none;--accent-green:#2d8057;
 }
+.accent{color:var(--accent-green)}
 body{font:16px/1.75 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;-webkit-font-smoothing:antialiased}
 .wrap{width:min(1120px,calc(100% - 80px))}
 .card{border:0;box-shadow:none;background:transparent;border-radius:0}
@@ -164,7 +165,7 @@ body{font:16px/1.75 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif
 .section{padding:75px 0}
 .section-heading{margin-bottom:25px}
 .section-heading h2{max-width:780px;margin-top:12px;font:400 clamp(27px,3vw,38px)/1.24 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;letter-spacing:-.9px}
-.section-heading h2 em{color:inherit;font-style:normal}
+.section-heading h2 em{color:var(--accent-green);font-style:normal}
 .presentation{padding:0;overflow:visible}
 .presentation video{border-radius:20px;background:#242522}
 .presentation-bottom{padding:13px 0 0}

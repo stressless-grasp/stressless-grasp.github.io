@@ -67,7 +67,7 @@ const comparisons = [
       <section class="wrap hero" id="top">
         <p class="eyebrow"><span class="dot"></span> SIM-TO-REAL · GENTLE MANIPULATION</p>
         <h1>StressLess</h1>
-        <p class="hero-subtitle">Cross-Category Deformable and Fragile Object Grasping from Stress-Aware Demonstrations at Scale</p>
+        <p class="hero-subtitle">Cross-Category Deformable and Fragile Object Grasping from <span class="accent">Stress-Aware Demonstrations</span> at Scale</p>
         <p class="lede">Learning to grasp fragile and deformable objects from stress-aware demonstrations generated at scale in simulation.</p>
         <div class="hero-actions">
           <a class="button primary" href={asset('paper/stressless.pdf')}>Read the paper <span>↗</span></a>
@@ -81,13 +81,13 @@ const comparisons = [
 
       <section class="wrap tldr card" aria-labelledby="tldr-title">
         <div class="tldr-mark" id="tldr-title">TL;DR</div>
-        <p>StressLess uses finite-element stress to synthesize stable, gentle grasps at scale, then trains one point-cloud policy that transfers zero-shot across fragile and deformable objects and improves both lift and safety in real-world trials.</p>
+        <p>StressLess uses finite-element stress to synthesize <span class="accent">stable, gentle grasps</span> at scale, then trains one point-cloud policy that transfers zero-shot across fragile and deformable objects and improves <span class="accent">both lifting success and grasp gentleness (object integrity)</span> in real-world trials.</p>
       </section>
 
       <section class="wrap section" id="video">
         <div class="section-heading"><div><p class="eyebrow">01 / PROJECT VIDEO</p><h2>Overview of StressLess</h2></div></div>
         <div class="presentation card">
-          <video id="presentation-video" src={asset('video/presentation-full.mp4')} controls playsinline preload="metadata" aria-label="Full StressLess project presentation"></video>
+          <video id="presentation-video" src={asset('video/presentation-full.mp4')} poster={asset('video/presentation-poster.jpg')} controls playsinline preload="metadata" aria-label="Full StressLess project presentation"></video>
           <div class="presentation-bottom"><div><h3>Full project presentation</h3><p>Highlights · motivation · method · experiments</p></div><span>03:00</span></div>
           <div class="jump-list" aria-label="Jump to a section of the video">{jumps.map((jump) => <button class="jump-button" type="button" data-time={jump.time}><span>{jump.label}</span><small>{jump.stamp}</small></button>)}</div>
         </div>
@@ -98,15 +98,15 @@ const comparisons = [
         <div class="method-card card">
           <div class="method-image"><img src={asset('figures/method-v4.png')} alt="Method figure: simulated stress-aware demonstration generation, point-cloud diffusion policy, and real-world deployment" loading="lazy" /></div>
           <div class="method-steps">
-            <article><span class="step-number">01</span><div><h3>Stress-aware demonstration generation</h3><p>A finite-element contact model scores grasp pose and closing width for internal stress and grip stability. Selected grasps run in soft-body simulation across randomized object poses, sizes, shapes, and materials.</p></div></article>
-            <article><span class="step-number">02</span><div><h3>Point-cloud policy learning</h3><p>One Diffusion Policy learns action chunks from all simulated demonstrations. A PointNet encoder processes the depth point cloud; robot pose and gripper width provide proprioception.</p></div></article>
-            <article><span class="step-number">03</span><div><h3>Zero-shot real-world deployment</h3><p>The policy controls a 7-DoF arm and parallel-jaw gripper from one fixed depth camera. It predicts end-effector pose and gripper width without tactile or force feedback.</p></div></article>
+            <article><span class="step-number">01</span><div><h3><span class="accent">Stress-aware</span> demonstration generation</h3><p>A finite-element contact model scores grasp pose and closing width for internal stress and grip stability. Selected grasps run in soft-body simulation across randomized object poses, sizes, shapes, and materials.</p></div></article>
+            <article><span class="step-number">02</span><div><h3><span class="accent">Point-cloud policy</span> learning</h3><p>One Diffusion Policy learns action chunks from all simulated demonstrations. A PointNet encoder processes the depth point cloud; robot pose and gripper width provide proprioception.</p></div></article>
+            <article><span class="step-number">03</span><div><h3><span class="accent">Zero-shot</span> real-world deployment</h3><p>The policy controls a 7-DoF arm and parallel-jaw gripper from one fixed depth camera. It predicts end-effector pose and gripper width without tactile or force feedback.</p></div></article>
           </div>
         </div>
       </div></section>
 
       <section class="wrap section" id="evaluation">
-        <div class="section-heading"><div><p class="eyebrow">03 / QUALITATIVE EVALUATION</p><h2>Gentle, reactive, and generalizable<br />grasping policy</h2></div></div>
+        <div class="section-heading"><div><p class="eyebrow">03 / QUALITATIVE EVALUATION</p><h2><span class="accent">Gentle, reactive, and generalizable</span><br />grasping policy</h2></div></div>
         <div class="comparisons">{comparisons.map((c) => <article class="comparison card">
           <div class="comparison-heading"><span class="feature-number">{c.number}</span><div><h3>{c.name}</h3><p>{c.description}</p></div></div>
           <div class="comparison-videos">
